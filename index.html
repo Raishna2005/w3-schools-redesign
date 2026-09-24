@@ -1,198 +1,1466 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>W3Schools // Redesign</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        mono: ['JetBrains Mono', 'monospace'],
-                    }
-                }
-            }
-        }
-    </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>W3Schools — Learn to Code</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green: #04AA6D;
+    --green-dark: #038a58;
+    --green-faint: #e6f7f1;
+    --bg: #f8f9fa;
+    --surface: #ffffff;
+    --surface-2: #f2f4f6;
+    --border: #e4e7eb;
+    --border-strong: #c8cdd5;
+    --text: #111318;
+    --text-2: #4a5060;
+    --text-3: #8a909e;
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Inter', sans-serif;
+    --radius: 8px;
+    --radius-lg: 14px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; }
+
+  /* ── TOPBAR ── */
+  .topbar {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center;
+    padding: 0 2rem; height: 58px; gap: 2rem;
+  }
+  .logo {
+    display: flex; align-items: center; gap: 10px;
+    flex-shrink: 0;
+  }
+  .logo-badge {
+    background: var(--green); color: #fff;
+    font-weight: 600; font-size: 13px;
+    padding: 4px 9px; border-radius: 6px;
+    letter-spacing: .04em;
+  }
+  .logo-name { font-size: 15px; font-weight: 600; }
+
+  .topnav {
+    display: flex; gap: 2px; flex: 1;
+  }
+  .topnav a {
+    font-size: 13px; color: var(--text-2);
+    padding: 6px 14px; border-radius: var(--radius);
+    transition: background .15s, color .15s;
+    white-space: nowrap;
+  }
+  .topnav a:hover { background: var(--surface-2); color: var(--text); }
+  .topnav a.active { color: var(--green); background: var(--green-faint); }
+
+  .topbar-right {
+    display: flex; align-items: center; gap: 10px; flex-shrink: 0;
+  }
+  .search-wrap {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 7px 14px; width: 230px;
+  }
+  .search-wrap svg { width: 15px; height: 15px; stroke: var(--text-3); flex-shrink: 0; }
+  .search-wrap input {
+    border: none; background: transparent; font-size: 13px;
+    color: var(--text); outline: none; width: 100%;
+    font-family: var(--sans);
+  }
+  .search-wrap input::placeholder { color: var(--text-3); }
+  .btn-green {
+    background: var(--green); color: #fff;
+    font-size: 13px; font-weight: 500; font-family: var(--sans);
+    padding: 8px 18px; border-radius: var(--radius);
+    border: none; cursor: pointer; transition: background .15s;
+    white-space: nowrap;
+  }
+  .btn-green:hover { background: var(--green-dark); }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 5rem 2rem 4.5rem;
+    text-align: center;
+  }
+  .hero-tag {
+    display: inline-block;
+    font-size: 11px; font-weight: 600; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--green);
+    background: var(--green-faint);
+    padding: 4px 12px; border-radius: 20px;
+    margin-bottom: 1.4rem;
+  }
+  .hero h1 {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 600; line-height: 1.15;
+    color: var(--text); max-width: 640px; margin: 0 auto 1.1rem;
+    letter-spacing: -.02em;
+  }
+  .hero h1 em {
+    font-style: normal; color: var(--green);
+  }
+  .hero p {
+    font-size: 16px; color: var(--text-2);
+    max-width: 520px; margin: 0 auto 2rem; line-height: 1.7;
+  }
+  .hero-btns {
+    display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;
+  }
+  .btn-outline {
+    background: transparent; color: var(--text);
+    font-size: 14px; font-weight: 500; font-family: var(--sans);
+    padding: 10px 22px; border-radius: var(--radius);
+    border: 1px solid var(--border-strong); cursor: pointer;
+    transition: background .15s, border-color .15s;
+  }
+  .btn-outline:hover { background: var(--surface-2); border-color: var(--border-strong); }
+
+  .hero-stats {
+    display: flex; justify-content: center; gap: 3rem;
+    margin-top: 3.5rem; padding-top: 2.5rem;
+    border-top: 1px solid var(--border);
+  }
+  .stat-n { font-size: 22px; font-weight: 600; color: var(--text); }
+  .stat-l { font-size: 12px; color: var(--text-3); margin-top: 2px; }
+
+  /* ── CODE PREVIEW BAND ── */
+  .code-band {
+    background: #0f1117;
+    padding: 2.5rem 2rem;
+    overflow: hidden;
+  }
+  .code-band-inner {
+    max-width: 860px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+  }
+  .code-block {
+    background: #1a1d27; border: 1px solid #2a2e3e;
+    border-radius: var(--radius-lg); overflow: hidden;
+  }
+  .code-block-header {
+    display: flex; align-items: center; gap: 8px;
+    padding: 10px 14px; border-bottom: 1px solid #2a2e3e;
+  }
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot-r { background: #ff5f57; }
+  .dot-y { background: #ffbd2e; }
+  .dot-g { background: #28c840; }
+  .code-lang {
+    margin-left: auto; font-size: 11px; font-family: var(--mono);
+    color: #5a6280; letter-spacing: .06em;
+  }
+  .code-block pre {
+    font-family: var(--mono); font-size: 12.5px; line-height: 1.8;
+    padding: 16px; color: #abb2bf; overflow: auto;
+  }
+  .kw { color: #c678dd; }
+  .tag { color: #e06c75; }
+  .attr { color: #d19a66; }
+  .val { color: #98c379; }
+  .fn { color: #61afef; }
+  .str { color: #98c379; }
+  .cm { color: #5c6370; font-style: italic; }
+  .num { color: #d19a66; }
+
+  /* ── SECTION SHELL ── */
+  .section {
+    padding: 4rem 2rem;
+  }
+  .section-inner { max-width: 960px; margin: 0 auto; }
+  .section-head {
+    margin-bottom: 2.5rem;
+  }
+  .eyebrow {
+    font-size: 11px; font-weight: 600; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--green);
+    margin-bottom: .5rem;
+  }
+  .section-head h2 {
+    font-size: 22px; font-weight: 600; color: var(--text);
+    letter-spacing: -.01em;
+  }
+  .section-head p {
+    font-size: 14px; color: var(--text-2); margin-top: .4rem; max-width: 500px;
+  }
+
+  /* ── TRACKS GRID ── */
+  .section-bg { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+  .tracks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
+  }
+  .track-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem 1rem;
+    cursor: pointer;
+    transition: border-color .15s, transform .15s, box-shadow .15s;
+    position: relative; overflow: hidden;
+  }
+  .track-card:hover {
+    border-color: var(--green);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(4,170,109,.1);
+  }
+  .track-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--track-color, var(--green));
+    opacity: 0; transition: opacity .2s;
+  }
+  .track-card:hover::before { opacity: 1; }
+  .track-emoji { font-size: 26px; margin-bottom: 12px; }
+  .track-name { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 3px; }
+  .track-desc { font-size: 11px; color: var(--text-3); }
+  .track-badge {
+    display: inline-block; font-size: 10px; font-weight: 500;
+    padding: 2px 8px; border-radius: 20px; margin-top: 10px;
+    background: var(--green-faint); color: var(--green);
+  }
+
+  /* ── FEATURED TUTORIAL STRIP ── */
+  .tutorial-strip {
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;
+  }
+  .tut-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  .tut-card:hover {
+    border-color: var(--border-strong);
+    box-shadow: 0 4px 16px rgba(0,0,0,.06);
+  }
+  .tut-thumb {
+    height: 120px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono); font-size: 13px;
+    color: #abb2bf; background: #0f1117;
+  }
+  .tut-body { padding: 1rem; }
+  .tut-tag {
+    display: inline-block; font-size: 10px; font-weight: 600;
+    letter-spacing: .06em; text-transform: uppercase;
+    padding: 2px 8px; border-radius: 20px; margin-bottom: 8px;
+    background: var(--green-faint); color: var(--green);
+  }
+  .tut-body h3 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .tut-body p { font-size: 12px; color: var(--text-2); line-height: 1.6; }
+  .tut-foot {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: .75rem 1rem; border-top: 1px solid var(--border);
+    font-size: 11px; color: var(--text-3);
+  }
+  .tut-foot span { display: flex; align-items: center; gap: 4px; }
+
+  /* ── REFERENCES TABLE SECTION ── */
+  .ref-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+  }
+  .ref-group h3 {
+    font-size: 13px; font-weight: 600; margin-bottom: 10px;
+    padding-bottom: 8px; border-bottom: 1px solid var(--border);
+    color: var(--text);
+  }
+  .ref-list { list-style: none; }
+  .ref-list li {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px;
+  }
+  .ref-list li:last-child { border-bottom: none; }
+  .ref-list a { color: var(--text-2); transition: color .15s; }
+  .ref-list a:hover { color: var(--green); }
+  .ref-count { font-size: 11px; font-family: var(--mono); color: var(--text-3); }
+
+  /* ── QUIZ SECTION ── */
+  .quiz-grid {
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px;
+  }
+  .quiz-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem;
+    cursor: pointer;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  .quiz-card:hover {
+    border-color: var(--green);
+    box-shadow: 0 4px 16px rgba(4,170,109,.1);
+  }
+  .quiz-icon { font-size: 22px; margin-bottom: 10px; }
+  .quiz-card h3 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .quiz-card p { font-size: 12px; color: var(--text-2); }
+  .quiz-meta { display: flex; align-items: center; gap: 10px; margin-top: 12px; }
+  .quiz-q { font-size: 11px; font-family: var(--mono); color: var(--text-3); }
+  .quiz-diff {
+    font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 20px;
+  }
+  .diff-easy { background: #e6f7f1; color: var(--green); }
+  .diff-med  { background: #fff4e0; color: #d97706; }
+  .diff-hard { background: #fde8e8; color: #dc2626; }
+
+  /* ── EXERCISES SECTION ── */
+  .exercise-list { display: flex; flex-direction: column; gap: 10px; }
+  .exercise-row {
+    display: flex; align-items: center; gap: 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1rem 1.25rem;
+    transition: border-color .15s;
+    cursor: pointer;
+  }
+  .exercise-row:hover { border-color: var(--border-strong); }
+  .ex-num {
+    font-size: 12px; font-family: var(--mono); color: var(--text-3);
+    min-width: 28px;
+  }
+  .ex-body { flex: 1; }
+  .ex-title { font-size: 14px; font-weight: 500; margin-bottom: 2px; }
+  .ex-desc { font-size: 12px; color: var(--text-2); }
+  .ex-right { display: flex; align-items: center; gap: 10px; }
+  .ex-tag {
+    font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 20px;
+    background: var(--surface-2); color: var(--text-3);
+  }
+  .arrow-btn {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: var(--surface-2); border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background .15s;
+  }
+  .arrow-btn:hover { background: var(--green-faint); }
+  .arrow-btn svg { width: 14px; height: 14px; stroke: var(--text-2); }
+
+  /* ── TOOLS SECTION ── */
+  .tools-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 14px;
+  }
+  .tool-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem;
+    cursor: pointer; transition: border-color .15s, box-shadow .15s;
+  }
+  .tool-card:hover {
+    border-color: var(--border-strong);
+    box-shadow: 0 4px 14px rgba(0,0,0,.06);
+  }
+  .tool-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; margin-bottom: 14px;
+    background: var(--surface-2);
+  }
+  .tool-card h3 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .tool-card p { font-size: 12px; color: var(--text-2); }
+
+  /* ── PATHWAY SECTION ── */
+  .pathway {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+  }
+  .pathway-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem;
+    background: var(--surface);
+    position: relative; overflow: hidden;
+  }
+  .pathway-card.featured {
+    border-color: var(--green);
+    background: linear-gradient(135deg, #f0fdf9 0%, #fff 60%);
+  }
+  .pathway-card h3 { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
+  .pathway-card p { font-size: 13px; color: var(--text-2); margin-bottom: 1.25rem; line-height: 1.7; }
+  .pathway-steps { list-style: none; margin-bottom: 1.5rem; }
+  .pathway-steps li {
+    font-size: 13px; color: var(--text-2); padding: 6px 0;
+    display: flex; align-items: center; gap: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .pathway-steps li:last-child { border-bottom: none; }
+  .check { color: var(--green); font-size: 14px; }
+
+  /* ── NEWSLETTER ── */
+  .newsletter {
+    background: var(--text);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 2rem; flex-wrap: wrap;
+  }
+  .newsletter h3 { font-size: 18px; font-weight: 600; color: #fff; }
+  .newsletter p { font-size: 13px; color: #9099ad; margin-top: 4px; }
+  .nl-form { display: flex; gap: 8px; flex-wrap: wrap; }
+  .nl-input {
+    background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15);
+    border-radius: var(--radius); padding: 10px 16px;
+    font-size: 13px; color: #fff; outline: none; font-family: var(--sans);
+    width: 240px;
+  }
+  .nl-input::placeholder { color: #5a6280; }
+  .nl-input:focus { border-color: var(--green); }
+
+  /* ── CHEATSHEET SECTION ── */
+  .cheat-grid {
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;
+  }
+  .cheat-card {
+    background: #0f1117; border-radius: var(--radius-lg);
+    overflow: hidden; border: 1px solid #2a2e3e;
+  }
+  .cheat-header {
+    padding: 12px 16px; background: #1a1d27;
+    border-bottom: 1px solid #2a2e3e;
+    font-size: 12px; font-family: var(--mono); color: #5a6280;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .cheat-dot { width: 7px; height: 7px; border-radius: 50%; background: #2a2e3e; }
+  .cheat-lang { color: var(--green); font-size: 11px; margin-left: auto; }
+  .cheat-body {
+    padding: 14px 16px;
+    font-family: var(--mono); font-size: 11.5px;
+    line-height: 2; color: #abb2bf;
+  }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials-grid {
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;
+  }
+  .testimonial {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+  }
+  .stars { color: #f59e0b; font-size: 13px; letter-spacing: 2px; margin-bottom: 12px; }
+  .testimonial p { font-size: 13px; color: var(--text-2); line-height: 1.7; margin-bottom: 1.25rem; }
+  .testimonial-author { display: flex; align-items: center; gap: 10px; }
+  .avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--green-faint); display: flex; align-items: center;
+    justify-content: center; font-size: 14px; font-weight: 600; color: var(--green);
+    flex-shrink: 0;
+  }
+  .author-name { font-size: 13px; font-weight: 600; }
+  .author-role { font-size: 11px; color: var(--text-3); }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--text);
+    color: #9099ad;
+    padding: 4rem 2rem 2rem;
+  }
+  .footer-inner { max-width: 960px; margin: 0 auto; }
+  .footer-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem;
+    margin-bottom: 3rem;
+  }
+  .footer-brand { }
+  .footer-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .footer-logo .logo-badge { font-size: 12px; }
+  .footer-logo span { color: #fff; font-size: 15px; font-weight: 600; }
+  .footer-brand p { font-size: 13px; line-height: 1.7; max-width: 280px; }
+  .footer-col h4 { color: #fff; font-size: 13px; font-weight: 600; margin-bottom: 14px; }
+  .footer-col ul { list-style: none; }
+  .footer-col li { padding: 5px 0; }
+  .footer-col a { font-size: 13px; color: #9099ad; transition: color .15s; }
+  .footer-col a:hover { color: var(--green); }
+  .footer-bottom {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-top: 2rem; border-top: 1px solid #1e2230;
+    font-size: 12px;
+  }
+  .footer-bottom-links { display: flex; gap: 1.5rem; }
+  .footer-bottom-links a { color: #9099ad; transition: color .15s; }
+  .footer-bottom-links a:hover { color: #fff; }
+
+  /* ── CERTIFICATIONS ── */
+  .cert-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 14px;
+  }
+  .cert-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem 1.25rem;
+    background: var(--surface);
+    text-align: center;
+    transition: border-color .15s, box-shadow .15s;
+    cursor: pointer;
+  }
+  .cert-card:hover {
+    border-color: var(--green);
+    box-shadow: 0 4px 20px rgba(4,170,109,.12);
+  }
+  .cert-icon { font-size: 32px; margin-bottom: 12px; }
+  .cert-card h3 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .cert-card p { font-size: 12px; color: var(--text-2); margin-bottom: 14px; }
+  .cert-badge {
+    display: inline-block; font-size: 11px; font-weight: 500;
+    padding: 4px 12px; border-radius: 20px;
+    background: var(--green-faint); color: var(--green);
+  }
+
+  /* ── HIGHLIGHT BANNER ── */
+  .highlight-banner {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 2rem 2.5rem;
+    display: flex; align-items: center; gap: 2rem;
+  }
+  .hb-icon { font-size: 48px; flex-shrink: 0; }
+  .hb-body { flex: 1; }
+  .hb-body h3 { font-size: 18px; font-weight: 600; margin-bottom: 6px; }
+  .hb-body p { font-size: 14px; color: var(--text-2); line-height: 1.7; }
+
+  /* ── PROGRESS CARD (WIDE) ── */
+  .progress-banner {
+    background: var(--green);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 2rem; flex-wrap: wrap;
+  }
+  .progress-banner h3 { font-size: 20px; font-weight: 600; color: #fff; }
+  .progress-banner p { font-size: 13px; color: rgba(255,255,255,.75); margin-top: 4px; }
+  .btn-white {
+    background: #fff; color: var(--green);
+    font-size: 14px; font-weight: 600; font-family: var(--sans);
+    padding: 10px 22px; border-radius: var(--radius);
+    border: none; cursor: pointer; white-space: nowrap;
+    transition: opacity .15s;
+  }
+  .btn-white:hover { opacity: .9; }
+
+  /* ── UPDATES FEED ── */
+  .updates-list { display: flex; flex-direction: column; gap: 0; }
+  .update-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 1rem 0; border-bottom: 1px solid var(--border);
+  }
+  .update-row:last-child { border-bottom: none; }
+  .update-date {
+    font-size: 11px; font-family: var(--mono); color: var(--text-3);
+    min-width: 80px; padding-top: 2px;
+  }
+  .update-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--green); margin-top: 5px; flex-shrink: 0;
+  }
+  .update-body { flex: 1; }
+  .update-body strong { font-size: 13px; font-weight: 600; }
+  .update-body p { font-size: 12px; color: var(--text-2); margin-top: 2px; }
+
+  /* divider */
+  .divider { border: none; border-top: 1px solid var(--border); }
+
+  @media (max-width: 768px) {
+    .topnav { display: none; }
+    .search-wrap { width: 160px; }
+    .hero h1 { font-size: 1.75rem; }
+    .code-band-inner { grid-template-columns: 1fr; }
+    .tutorial-strip { grid-template-columns: 1fr; }
+    .quiz-grid { grid-template-columns: 1fr 1fr; }
+    .ref-grid { grid-template-columns: 1fr; }
+    .cheat-grid { grid-template-columns: 1fr; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .pathway { grid-template-columns: 1fr; }
+    .cert-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
 </head>
-<body class="bg-[#0f1115] text-[#e2e8f0] font-sans antialiased selection:bg-emerald-500 selection:text-black min-h-screen flex flex-col justify-between">
+<body>
 
-    <div>
-        <!-- Top Navigation Bar -->
-        <header class="border-b border-zinc-800 bg-[#161920] sticky top-0 z-50">
-            <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-                <div class="flex items-center space-x-6">
-                    <div class="flex items-center space-x-2">
-                        <div class="bg-emerald-500 text-black font-mono font-bold text-lg px-2.5 py-1 rounded">
-                            W3
-                        </div>
-                        <span class="font-bold tracking-tight text-white text-lg">Schools<span class="text-emerald-500">.redesign</span></span>
-                    </div>
-                    <nav class="hidden md:flex space-x-4 text-sm text-zinc-400">
-                        <a href="#" class="text-white hover:text-emerald-400 transition">Tutorials</a>
-                        <a href="#" class="hover:text-emerald-400 transition">Exercises</a>
-                        <a href="#" class="hover:text-emerald-400 transition">Certificates</a>
-                        <a href="#" class="hover:text-emerald-400 transition">Services</a>
-                    </nav>
-                </div>
-                
-                <div class="flex items-center space-x-3">
-                    <button onclick="toggleView()" id="viewToggleBtn" class="bg-zinc-800 border border-zinc-700 text-zinc-300 px-3 py-1.5 rounded text-xs font-mono font-medium hover:border-emerald-500 transition">
-                        Mode: Redesigned (Dark)
-                    </button>
-                    <a href="https://www.w3schools.com" target="_blank" class="bg-emerald-500 hover:bg-emerald-400 text-black font-semibold px-4 py-1.5 rounded text-xs transition">
-                        Original Site ↗
-                    </a>
-                </div>
-            </div>
-        </header>
-
-        <!-- Main Content Area -->
-        <main class="max-w-7xl mx-auto px-4 py-8">
-            
-            <!-- Hero Search Section -->
-            <div class="text-center max-w-2xl mx-auto mb-12">
-                <h1 class="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-3">
-                    Learn to Code. <span class="text-emerald-400">Smarter.</span>
-                </h1>
-                <p class="text-zinc-400 text-sm md:text-base mb-6">
-                    A clean, modern, clutter-free developer experience inspired by the web's best redesign principles.
-                </p>
-                <div class="relative">
-                    <input type="text" placeholder="Search our tutorials (e.g., HTML, CSS, JavaScript)..." class="w-full bg-[#161920] border border-zinc-800 rounded-lg px-4 py-3 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-emerald-500 transition shadow-inner">
-                    <span class="absolute right-3 top-3 bg-zinc-800 border border-zinc-700 text-zinc-400 text-xs px-2 py-1 rounded font-mono">/</span>
-                </div>
-            </div>
-
-            <!-- Quick Language Grid -->
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mb-12">
-                <div class="bg-[#161920] border border-zinc-800 hover:border-emerald-500/50 p-4 rounded-xl text-center transition cursor-pointer group">
-                    <div class="text-emerald-400 font-mono font-bold text-lg mb-1 group-hover:scale-105 transition">&lt;HTML&gt;</div>
-                    <div class="text-xs text-zinc-400">Markup Language</div>
-                </div>
-                <div class="bg-[#161920] border border-zinc-800 hover:border-emerald-500/50 p-4 rounded-xl text-center transition cursor-pointer group">
-                    <div class="text-emerald-400 font-mono font-bold text-lg mb-1 group-hover:scale-105 transition">CSS</div>
-                    <div class="text-xs text-zinc-400">Styling & Layout</div>
-                </div>
-                <div class="bg-[#161920] border border-zinc-800 hover:border-emerald-500/50 p-4 rounded-xl text-center transition cursor-pointer group">
-                    <div class="text-emerald-400 font-mono font-bold text-lg mb-1 group-hover:scale-105 transition">JS</div>
-                    <div class="text-xs text-zinc-400">Programming</div>
-                </div>
-                <div class="bg-[#161920] border border-zinc-800 hover:border-emerald-500/50 p-4 rounded-xl text-center transition cursor-pointer group">
-                    <div class="text-emerald-400 font-mono font-bold text-lg mb-1 group-hover:scale-105 transition">SQL</div>
-                    <div class="text-xs text-zinc-400">Databases</div>
-                </div>
-                <div class="bg-[#161920] border border-zinc-800 hover:border-emerald-500/50 p-4 rounded-xl text-center transition cursor-pointer group">
-                    <div class="text-emerald-400 font-mono font-bold text-lg mb-1 group-hover:scale-105 transition">PYTHON</div>
-                    <div class="text-xs text-zinc-400">Data & Backend</div>
-                </div>
-                <div class="bg-[#161920] border border-zinc-800 hover:border-emerald-500/50 p-4 rounded-xl text-center transition cursor-pointer group">
-                    <div class="text-emerald-400 font-mono font-bold text-lg mb-1 group-hover:scale-105 transition">REACT</div>
-                    <div class="text-xs text-zinc-400">UI Library</div>
-                </div>
-            </div>
-
-            <!-- Live Code Sandbox Preview Component -->
-            <div class="bg-[#161920] border border-zinc-800 rounded-xl overflow-hidden mb-12">
-                <div class="bg-[#1f232b] px-4 py-3 border-b border-zinc-800 flex items-center justify-between">
-                    <div class="flex items-center space-x-2">
-                        <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
-                        <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
-                        <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
-                        <span class="text-xs text-zinc-400 font-mono ml-2">interactive_compiler.html</span>
-                    </div>
-                    <button onclick="runCode()" class="bg-emerald-500 text-black font-semibold text-xs px-3 py-1 rounded hover:bg-emerald-400 transition">
-                        Run Code ▶
-                    </button>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-zinc-800">
-                    <div class="p-4 bg-[#12141a]">
-                        <pre class="text-xs font-mono text-zinc-300 overflow-x-auto leading-relaxed"><code><span class="text-pink-400">&lt;div</span> <span class="text-blue-400">class</span>=<span class="text-emerald-300">"card"</span><span class="text-pink-400">&gt;</span>
-  <span class="text-pink-400">&lt;h2&gt;</span>Hello World<span class="text-pink-400">&lt;/h2&gt;</span>
-  <span class="text-pink-400">&lt;p&gt;</span>Clean modern redesign.<span class="text-pink-400">&lt;/p&gt;</span>
-<span class="text-pink-400">&lt;/div&gt;</span></code></pre>
-                    </div>
-                    <div class="p-4 bg-[#161920] flex flex-col justify-center">
-                        <div class="text-xs text-zinc-500 uppercase font-mono mb-2">Live Output Preview:</div>
-                        <div class="p-4 bg-zinc-900 border border-zinc-800 rounded-lg">
-                            <h2 class="text-white font-bold text-base mb-1">Hello World</h2>
-                            <p class="text-zinc-400 text-sm">Clean modern redesign.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Task Dropbox Submission Tool -->
-            <div class="bg-[#161920] border border-emerald-500/30 rounded-xl p-6 shadow-lg">
-                <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2 font-mono">
-                        <span>📌</span> Task Dropbox Generator (#ge-website-redesign)
-                    </h3>
-                    <span class="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">Ready to Submit</span>
-                </div>
-                <div class="bg-[#0f1115] border border-zinc-800 p-4 rounded-lg font-mono text-xs text-zinc-300 mb-4 space-y-1">
-                    <p class="text-emerald-400 font-bold">#ge-website-redesign</p>
-                    <p>• Original Website: <span class="text-zinc-400 underline">https://www.w3schools.com/</span></p>
-                    <p>• Redesigned Website: <span class="text-emerald-400 underline" id="previewUrl">(Insert your Vercel/Netlify URL)</span></p>
-                </div>
-                <div class="flex flex-col sm:flex-row gap-3">
-                    <input type="text" id="deployUrlInput" placeholder="Paste your deployed website URL here..." class="bg-[#0f1115] border border-zinc-800 rounded px-3 py-2 text-xs text-white font-mono flex-1 focus:outline-none focus:border-emerald-500" oninput="updateUrl(this.value)">
-                    <button onclick="copySubmission()" class="bg-emerald-500 hover:bg-emerald-400 text-black font-semibold text-xs px-5 py-2 rounded transition font-mono">
-                        Copy Submission Text
-                    </button>
-                </div>
-            </div>
-
-        </main>
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="logo">
+    <span class="logo-badge">W3</span>
+    <span class="logo-name">Schools</span>
+  </div>
+  <nav class="topnav" aria-label="Main">
+    <a href="#" class="active">Tutorials</a>
+    <a href="#">References</a>
+    <a href="#">Exercises</a>
+    <a href="#">Quizzes</a>
+    <a href="#">Certificates</a>
+    <a href="#">Tools</a>
+    <a href="#">Blog</a>
+    <a href="#">Videos</a>
+  </nav>
+  <div class="topbar-right">
+    <div class="search-wrap">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+      <input type="text" placeholder="Search…" aria-label="Search topics">
     </div>
+    <button class="btn-green">Sign up free</button>
+  </div>
+</header>
 
-    <!-- Footer -->
-    <footer class="border-t border-zinc-800 bg-[#161920] py-6 mt-12 text-center text-xs text-zinc-500">
-        <p>W3Schools Redesign Challenge • Built for clean aesthetics, high performance, and simplicity.</p>
-    </footer>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-tag">Free learning for everyone</div>
+  <h1>Learn <em>web development</em> from scratch</h1>
+  <p>Thousands of tutorials, reference guides, exercises, and quizzes — all in one place. Build real projects. Get certified.</p>
+  <div class="hero-btns">
+    <button class="btn-green" style="font-size:14px;padding:10px 22px;">Start learning HTML</button>
+    <button class="btn-outline">Browse all topics</button>
+  </div>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-n">80M+</div>
+      <div class="stat-l">learners each month</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n">1,400+</div>
+      <div class="stat-l">tutorials</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n">50,000+</div>
+      <div class="stat-l">exercises</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n">Free</div>
+      <div class="stat-l">forever, no catch</div>
+    </div>
+  </div>
+</section>
 
-    <!-- Script Logic -->
-    <script>
-        let isLightMode = false;
+<!-- CODE BAND -->
+<div class="code-band">
+  <div class="code-band-inner">
+    <div class="code-block">
+      <div class="code-block-header">
+        <span class="dot dot-r"></span>
+        <span class="dot dot-y"></span>
+        <span class="dot dot-g"></span>
+        <span class="code-lang">HTML</span>
+      </div>
+      <pre><span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html&gt;</span>
+  <span class="tag">&lt;head&gt;</span>
+    <span class="tag">&lt;title&gt;</span>My First Page<span class="tag">&lt;/title&gt;</span>
+  <span class="tag">&lt;/head&gt;</span>
+  <span class="tag">&lt;body&gt;</span>
+    <span class="tag">&lt;h1&gt;</span>Hello, World!<span class="tag">&lt;/h1&gt;</span>
+    <span class="tag">&lt;p&gt;</span>Welcome to the web.<span class="tag">&lt;/p&gt;</span>
+  <span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></pre>
+    </div>
+    <div class="code-block">
+      <div class="code-block-header">
+        <span class="dot dot-r"></span>
+        <span class="dot dot-y"></span>
+        <span class="dot dot-g"></span>
+        <span class="code-lang">JavaScript</span>
+      </div>
+      <pre><span class="cm">// Arrow function + template literal</span>
+<span class="kw">const</span> <span class="fn">greet</span> = (<span class="attr">name</span>) => {
+  <span class="kw">return</span> <span class="str">`Hello, ${name}!`</span>;
+};
 
-        function toggleView() {
-            isLightMode = !isLightMode;
-            const btn = document.getElementById('viewToggleBtn');
-            
-            if (isLightMode) {
-                document.body.className = "bg-[#f4f4f5] text-[#18181b] font-sans antialiased selection:bg-emerald-500 selection:text-white min-h-screen flex flex-col justify-between";
-                btn.innerText = "Mode: Classic Light (W3 Style)";
-                btn.className = "bg-white border border-zinc-300 text-zinc-700 px-3 py-1.5 rounded text-xs font-mono font-medium hover:border-emerald-500 transition shadow-sm";
-            } else {
-                document.body.className = "bg-[#0f1115] text-[#e2e8f0] font-sans antialiased selection:bg-emerald-500 selection:text-black min-h-screen flex flex-col justify-between";
-                btn.innerText = "Mode: Redesigned (Dark)";
-                btn.className = "bg-zinc-800 border border-zinc-700 text-zinc-300 px-3 py-1.5 rounded text-xs font-mono font-medium hover:border-emerald-500 transition";
-            }
-        }
+<span class="cm">// Array methods</span>
+<span class="kw">const</span> nums = [<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>, <span class="num">5</span>];
+<span class="kw">const</span> doubled = nums.<span class="fn">map</span>(n => n * <span class="num">2</span>);
 
-        function updateUrl(val) {
-            const preview = document.getElementById('previewUrl');
-            preview.innerText = val.trim() ? val : '(Insert your Vercel/Netlify URL)';
-        }
+console.<span class="fn">log</span>(<span class="fn">greet</span>(<span class="str">'W3'</span>));
+<span class="cm">// → "Hello, W3!"</span></pre>
+    </div>
+  </div>
+</div>
 
-        function runCode() {
-            alert("✨ Sandbox executed successfully! The layout layout reacts instantly.");
-        }
+<!-- TRACKS SECTION -->
+<section class="section section-bg">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="eyebrow">Topics</div>
+      <h2>Where do you want to start?</h2>
+      <p>From beginner to advanced — find the track that fits your goals.</p>
+    </div>
+    <div class="tracks-grid">
+      <div class="track-card" style="--track-color:#e34c26">
+        <div class="track-emoji">🌐</div>
+        <div class="track-name">HTML</div>
+        <div class="track-desc">Structure the web</div>
+        <span class="track-badge">Beginner</span>
+      </div>
+      <div class="track-card" style="--track-color:#264de4">
+        <div class="track-emoji">🎨</div>
+        <div class="track-name">CSS</div>
+        <div class="track-desc">Style and layout</div>
+        <span class="track-badge">Beginner</span>
+      </div>
+      <div class="track-card" style="--track-color:#f7df1e">
+        <div class="track-emoji">⚡</div>
+        <div class="track-name">JavaScript</div>
+        <div class="track-desc">Add interactivity</div>
+        <span class="track-badge">Beginner</span>
+      </div>
+      <div class="track-card" style="--track-color:#3776ab">
+        <div class="track-emoji">🐍</div>
+        <div class="track-name">Python</div>
+        <div class="track-desc">Scripting & data</div>
+        <span class="track-badge">Beginner</span>
+      </div>
+      <div class="track-card" style="--track-color:#4479a1">
+        <div class="track-emoji">🗄️</div>
+        <div class="track-name">SQL</div>
+        <div class="track-desc">Query databases</div>
+        <span class="track-badge">Beginner</span>
+      </div>
+      <div class="track-card" style="--track-color:#04AA6D">
+        <div class="track-emoji">⚛️</div>
+        <div class="track-name">React</div>
+        <div class="track-desc">Build UIs faster</div>
+        <span class="track-badge">Intermediate</span>
+      </div>
+      <div class="track-card" style="--track-color:#007acc">
+        <div class="track-emoji">🔷</div>
+        <div class="track-name">TypeScript</div>
+        <div class="track-desc">Typed JavaScript</div>
+        <span class="track-badge">Intermediate</span>
+      </div>
+      <div class="track-card" style="--track-color:#339933">
+        <div class="track-emoji">🟢</div>
+        <div class="track-name">Node.js</div>
+        <div class="track-desc">Server-side JS</div>
+        <span class="track-badge">Intermediate</span>
+      </div>
+      <div class="track-card" style="--track-color:#9b59b6">
+        <div class="track-emoji">🐘</div>
+        <div class="track-name">PHP</div>
+        <div class="track-desc">Dynamic web pages</div>
+        <span class="track-badge">Intermediate</span>
+      </div>
+      <div class="track-card" style="--track-color:#e74c3c">
+        <div class="track-emoji">☕</div>
+        <div class="track-name">Java</div>
+        <div class="track-desc">Object-oriented</div>
+        <span class="track-badge">Intermediate</span>
+      </div>
+      <div class="track-card" style="--track-color:#b07219">
+        <div class="track-emoji">⚙️</div>
+        <div class="track-name">C++</div>
+        <div class="track-desc">Systems programming</div>
+        <span class="track-badge">Advanced</span>
+      </div>
+      <div class="track-card" style="--track-color:#3776ab">
+        <div class="track-emoji">🤖</div>
+        <div class="track-name">Machine Learning</div>
+        <div class="track-desc">AI fundamentals</div>
+        <span class="track-badge">Advanced</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-        function copySubmission() {
-            const urlInput = document.getElementById('deployUrlInput').value.trim();
-            const targetUrl = urlInput ? urlInput : '(Insert your Vercel/Netlify URL)';
-            const text = `#ge-website-redesign\n• Original Website: https://www.w3schools.com/\n• Redesigned Website: ${targetUrl}`;
-            
-            navigator.clipboard.writeText(text);
-            alert("✅ Successfully copied to clipboard! Paste it into the #ge-website-redesign channel.");
-        }
-    </script>
+<!-- FEATURED TUTORIALS -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="eyebrow">Tutorials</div>
+      <h2>Popular right now</h2>
+      <p>Hands-on lessons with live examples you can edit and run.</p>
+    </div>
+    <div class="tutorial-strip">
+      <div class="tut-card">
+        <div class="tut-thumb">
+          <span><span class="tag">&lt;div</span> <span class="attr">class=</span><span class="val">"flex"</span><span class="tag">&gt;</span></span>
+        </div>
+        <div class="tut-body">
+          <span class="tut-tag">CSS</span>
+          <h3>CSS Flexbox in 10 minutes</h3>
+          <p>Master one-dimensional layout with flex containers and flex items — includes interactive examples.</p>
+        </div>
+        <div class="tut-foot">
+          <span>⏱ 10 min</span>
+          <span>⭐ 4.8</span>
+        </div>
+      </div>
+      <div class="tut-card">
+        <div class="tut-thumb">
+          <span><span class="kw">async</span> <span class="fn">fetchData</span>() { ... }</span>
+        </div>
+        <div class="tut-body">
+          <span class="tut-tag">JavaScript</span>
+          <h3>Async/Await explained</h3>
+          <p>Learn how to write asynchronous JavaScript without callback hell — clean, readable patterns.</p>
+        </div>
+        <div class="tut-foot">
+          <span>⏱ 15 min</span>
+          <span>⭐ 4.9</span>
+        </div>
+      </div>
+      <div class="tut-card">
+        <div class="tut-thumb">
+          <span><span class="kw">SELECT</span> * <span class="kw">FROM</span> users <span class="kw">WHERE</span> ...</span>
+        </div>
+        <div class="tut-body">
+          <span class="tut-tag">SQL</span>
+          <h3>SQL JOINs: a visual guide</h3>
+          <p>Understand INNER, LEFT, RIGHT, and FULL JOINs with clear diagrams and real queries.</p>
+        </div>
+        <div class="tut-foot">
+          <span>⏱ 12 min</span>
+          <span>⭐ 4.7</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRESS BANNER -->
+<section class="section" style="padding-top:0">
+  <div class="section-inner">
+    <div class="progress-banner">
+      <div>
+        <h3>Track your learning progress</h3>
+        <p>Create a free account to save where you left off and earn certificates as you go.</p>
+      </div>
+      <button class="btn-white">Create free account</button>
+    </div>
+  </div>
+</section>
+
+<!-- REFERENCE SECTION -->
+<section class="section section-bg">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="eyebrow">References</div>
+      <h2>Quick reference</h2>
+      <p>Look up any tag, property, method, or keyword — organized and searchable.</p>
+    </div>
+    <div class="ref-grid">
+      <div class="ref-group">
+        <h3>HTML</h3>
+        <ul class="ref-list">
+          <li><a href="#">HTML Tags A–Z</a><span class="ref-count">~150 tags</span></li>
+          <li><a href="#">Global Attributes</a><span class="ref-count">~30</span></li>
+          <li><a href="#">Event Attributes</a><span class="ref-count">~60</span></li>
+          <li><a href="#">Character Sets</a><span class="ref-count">UTF-8</span></li>
+          <li><a href="#">URL Encoding</a><span class="ref-count">ASCII ref</span></li>
+          <li><a href="#">Status Codes</a><span class="ref-count">HTTP 1–5xx</span></li>
+        </ul>
+      </div>
+      <div class="ref-group">
+        <h3>CSS</h3>
+        <ul class="ref-list">
+          <li><a href="#">CSS Properties A–Z</a><span class="ref-count">~300</span></li>
+          <li><a href="#">CSS Selectors</a><span class="ref-count">~50</span></li>
+          <li><a href="#">CSS Colors</a><span class="ref-count">Named colors</span></li>
+          <li><a href="#">CSS Animations</a><span class="ref-count">Keyframes</span></li>
+          <li><a href="#">CSS Functions</a><span class="ref-count">~80</span></li>
+          <li><a href="#">CSS Variables</a><span class="ref-count">Custom props</span></li>
+        </ul>
+      </div>
+      <div class="ref-group">
+        <h3>JavaScript</h3>
+        <ul class="ref-list">
+          <li><a href="#">JS Methods</a><span class="ref-count">~400</span></li>
+          <li><a href="#">Array Methods</a><span class="ref-count">~30</span></li>
+          <li><a href="#">String Methods</a><span class="ref-count">~25</span></li>
+          <li><a href="#">DOM Methods</a><span class="ref-count">~80</span></li>
+          <li><a href="#">Browser APIs</a><span class="ref-count">Fetch, WS…</span></li>
+          <li><a href="#">Regular Expressions</a><span class="ref-count">Regex ref</span></li>
+        </ul>
+      </div>
+      <div class="ref-group">
+        <h3>Python & more</h3>
+        <ul class="ref-list">
+          <li><a href="#">Python Keywords</a><span class="ref-count">35 keywords</span></li>
+          <li><a href="#">Python Built-ins</a><span class="ref-count">~70</span></li>
+          <li><a href="#">SQL Functions</a><span class="ref-count">~100</span></li>
+          <li><a href="#">Git Commands</a><span class="ref-count">Essential</span></li>
+          <li><a href="#">Linux Commands</a><span class="ref-count">Bash ref</span></li>
+          <li><a href="#">Regex Cheatsheet</a><span class="ref-count">Patterns</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXERCISES SECTION -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="eyebrow">Practice</div>
+      <h2>Exercises to test your skills</h2>
+      <p>Short, focused exercises with instant feedback. No setup required.</p>
+    </div>
+    <div class="exercise-list">
+      <div class="exercise-row">
+        <span class="ex-num">01</span>
+        <div class="ex-body">
+          <div class="ex-title">HTML: Build a basic webpage structure</div>
+          <div class="ex-desc">Use semantic elements — header, main, footer — to wrap your content.</div>
+        </div>
+        <div class="ex-right">
+          <span class="ex-tag">HTML</span>
+          <button class="arrow-btn" aria-label="Open exercise">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="exercise-row">
+        <span class="ex-num">02</span>
+        <div class="ex-body">
+          <div class="ex-title">CSS: Center a div both horizontally and vertically</div>
+          <div class="ex-desc">Use Flexbox or Grid to achieve perfect centering.</div>
+        </div>
+        <div class="ex-right">
+          <span class="ex-tag">CSS</span>
+          <button class="arrow-btn" aria-label="Open exercise">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="exercise-row">
+        <span class="ex-num">03</span>
+        <div class="ex-body">
+          <div class="ex-title">JavaScript: Reverse a string without .reverse()</div>
+          <div class="ex-desc">Write a function that reverses a string using only loops or spread.</div>
+        </div>
+        <div class="ex-right">
+          <span class="ex-tag">JavaScript</span>
+          <button class="arrow-btn" aria-label="Open exercise">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="exercise-row">
+        <span class="ex-num">04</span>
+        <div class="ex-body">
+          <div class="ex-title">SQL: Find the top 5 customers by order value</div>
+          <div class="ex-desc">Use GROUP BY and ORDER BY with an aggregate function.</div>
+        </div>
+        <div class="ex-right">
+          <span class="ex-tag">SQL</span>
+          <button class="arrow-btn" aria-label="Open exercise">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="exercise-row">
+        <span class="ex-num">05</span>
+        <div class="ex-body">
+          <div class="ex-title">Python: Count word frequency in a string</div>
+          <div class="ex-desc">Return a dict with each word as key and its count as value.</div>
+        </div>
+        <div class="ex-right">
+          <span class="ex-tag">Python</span>
+          <button class="arrow-btn" aria-label="Open exercise">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="exercise-row">
+        <span class="ex-num">06</span>
+        <div class="ex-body">
+          <div class="ex-title">CSS Grid: Build a responsive 3-column card layout</div>
+          <div class="ex-desc">Collapse to a single column on mobile using auto-fill or media queries.</div>
+        </div>
+        <div class="ex-right">
+          <span class="ex-tag">CSS</span>
+          <button class="arrow-btn" aria-label="Open exercise">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHEATSHEETS -->
+<section class="section section-bg">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="eyebrow">Cheatsheets</div>
+      <h2>Syntax at a glance</h2>
+      <p>Copy-paste-ready patterns for the most common tasks.</p>
+    </div>
+    <div class="cheat-grid">
+      <div class="cheat-card">
+        <div class="cheat-header">
+          <span class="cheat-dot"></span> style.css
+          <span class="cheat-lang">CSS</span>
+        </div>
+        <div class="cheat-body">
+<span class="cm">/* Flexbox center */</span>
+<span class="fn">.container</span> {
+  <span class="attr">display</span>: <span class="val">flex</span>;
+  <span class="attr">justify-content</span>: <span class="val">center</span>;
+  <span class="attr">align-items</span>: <span class="val">center</span>;
+}
+
+<span class="cm">/* CSS Grid auto-columns */</span>
+<span class="fn">.grid</span> {
+  <span class="attr">display</span>: <span class="val">grid</span>;
+  <span class="attr">grid-template-columns</span>:
+    <span class="fn">repeat</span>(<span class="val">auto-fill</span>,
+    <span class="fn">minmax</span>(<span class="num">200px</span>, <span class="val">1fr</span>));
+}</div>
+      </div>
+      <div class="cheat-card">
+        <div class="cheat-header">
+          <span class="cheat-dot"></span> app.js
+          <span class="cheat-lang">JavaScript</span>
+        </div>
+        <div class="cheat-body">
+<span class="cm">// Fetch with async/await</span>
+<span class="kw">async</span> <span class="kw">function</span> <span class="fn">getData</span>() {
+  <span class="kw">const</span> res = <span class="kw">await</span> <span class="fn">fetch</span>(<span class="str">'/api'</span>);
+  <span class="kw">const</span> json = <span class="kw">await</span> res.<span class="fn">json</span>();
+  <span class="kw">return</span> json;
+}
+
+<span class="cm">// Destructuring</span>
+<span class="kw">const</span> { name, age } = user;
+<span class="kw">const</span> [first, ...rest] = arr;</div>
+      </div>
+      <div class="cheat-card">
+        <div class="cheat-header">
+          <span class="cheat-dot"></span> query.sql
+          <span class="cheat-lang">SQL</span>
+        </div>
+        <div class="cheat-body">
+<span class="cm">-- JOIN example</span>
+<span class="kw">SELECT</span>
+  u.name, o.total
+<span class="kw">FROM</span> users u
+<span class="kw">INNER JOIN</span> orders o
+  <span class="kw">ON</span> u.id = o.user_id
+<span class="kw">WHERE</span> o.total > <span class="num">100</span>
+<span class="kw">ORDER BY</span> o.total <span class="kw">DESC</span>
+<span class="kw">LIMIT</span> <span class="num">10</span>;</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUIZZES -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="eyebrow">Quizzes</div>
+      <h2>Test what you know</h2>
+      <p>Quick multi-choice quizzes at the end of each topic. See how much you've retained.</p>
+    </div>
+    <div class="quiz-grid">
+      <div class="quiz-card">
+        <div class="quiz-icon">🌐</div>
+        <h3>HTML Fundamentals</h3>
+        <p>Tags, attributes, semantic elements and page structure.</p>
+        <div class="quiz-meta">
+          <span class="quiz-q">25 questions</span>
+          <span class="quiz-diff diff-easy">Beginner</span>
+        </div>
+      </div>
+      <div class="quiz-card">
+        <div class="quiz-icon">🎨</div>
+        <h3>CSS Layouts</h3>
+        <p>Flexbox, Grid, positioning and responsive design.</p>
+        <div class="quiz-meta">
+          <span class="quiz-q">20 questions</span>
+          <span class="quiz-diff diff-med">Intermediate</span>
+        </div>
+      </div>
+      <div class="quiz-card">
+        <div class="quiz-icon">⚡</div>
+        <h3>JavaScript Basics</h3>
+        <p>Variables, functions, loops, and the DOM.</p>
+        <div class="quiz-meta">
+          <span class="quiz-q">30 questions</span>
+          <span class="quiz-diff diff-easy">Beginner</span>
+        </div>
+      </div>
+      <div class="quiz-card">
+        <div class="quiz-icon">🐍</div>
+        <h3>Python Data Structures</h3>
+        <p>Lists, dicts, sets, tuples and comprehensions.</p>
+        <div class="quiz-meta">
+          <span class="quiz-q">22 questions</span>
+          <span class="quiz-diff diff-med">Intermediate</span>
+        </div>
+      </div>
+      <div class="quiz-card">
+        <div class="quiz-icon">🗄️</div>
+        <h3>SQL Joins & Aggregates</h3>
+        <p>Complex queries, group by, having, and subqueries.</p>
+        <div class="quiz-meta">
+          <span class="quiz-q">18 questions</span>
+          <span class="quiz-diff diff-hard">Advanced</span>
+        </div>
+      </div>
+      <div class="quiz-card">
+        <div class="quiz-icon">⚛️</div>
+        <h3>React Hooks</h3>
+        <p>useState, useEffect, useContext, useMemo explained.</p>
+        <div class="quiz-meta">
+          <span class="quiz-q">15 questions</span>
+          <span class="quiz-diff diff-hard">Advanced</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEARNING PATHWAYS -->
+<section class="section section-bg">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="eyebrow">Pathways</div>
+      <h2>Structured learning paths</h2>
+      <p>Not sure what to learn next? Follow a curated path built around real job roles.</p>
+    </div>
+    <div class="pathway">
+      <div class="pathway-card featured">
+        <h3>Front-end developer</h3>
+        <p>Build everything users see and interact with. Start with HTML, add styling, then make it dynamic with JavaScript.</p>
+        <ul class="pathway-steps">
+          <li><span class="check">✓</span> HTML & semantic markup</li>
+          <li><span class="check">✓</span> CSS & responsive design</li>
+          <li><span class="check">✓</span> JavaScript fundamentals</li>
+          <li><span class="check">✓</span> React or Vue</li>
+          <li><span class="check">✓</span> Version control with Git</li>
+        </ul>
+        <button class="btn-green">Start this path</button>
+      </div>
+      <div class="pathway-card">
+        <h3>Back-end developer</h3>
+        <p>Build the logic, databases, and APIs that power web applications from the server side.</p>
+        <ul class="pathway-steps">
+          <li><span class="check" style="color:var(--text-3)">○</span> Python or Node.js basics</li>
+          <li><span class="check" style="color:var(--text-3)">○</span> SQL & database design</li>
+          <li><span class="check" style="color:var(--text-3)">○</span> REST API design</li>
+          <li><span class="check" style="color:var(--text-3)">○</span> Authentication & security</li>
+          <li><span class="check" style="color:var(--text-3)">○</span> Deployment & cloud basics</li>
+        </ul>
+        <button class="btn-outline">Explore path</button>
+      </div>
+      <div class="pathway-card">
+        <h3>Data analyst</h3>
+        <p>Use SQL and Python to collect, clean, and communicate data-driven insights.</p>
+        <ul class="pathway-steps">
+          <li><span class="check" style="color:var(--text-3)">○</span> SQL fundamentals</li>
+          <li><span class="check" style="color:var(--text-3)">○</span> Python with pandas</li>
+          <li><span class="check" style="color:var(--text-3)">○</span> Data visualization</li>
+          <li><span class="check" style="color:var(--text-3)">○</span> Statistics basics</li>
+          <li><span class="check" style="color:var(--text-3)">○</span> Jupyter notebooks</li>
+        </ul>
+        <button class="btn-outline">Explore path</button>
+      </div>
+      <div class="pathway-card">
+        <h3>Full-stack developer</h3>
+        <p>Handle everything from the browser to the server. A broader role that combines front-end and back-end skills.</p>
+        <ul class="pathway-steps">
+          <li><span class="check" style="color:var(--text-3)">○</span> HTML, CSS, JavaScript</li>
+          <li><span class="check" style="color:var(--text-3)">○</span> React + Node.js</li>
+          <li><span class="check" style="color:var(--text-3)">○</span> SQL & NoSQL databases</li>
+          <li><span class="check" style="color:var(--text-3)">○</span> REST & GraphQL APIs</li>
+          <li><span class="check" style="color:var(--text-3)">○</span> DevOps fundamentals</li>
+        </ul>
+        <button class="btn-outline">Explore path</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS SECTION -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="eyebrow">Tools</div>
+      <h2>Build and test in the browser</h2>
+      <p>No local setup. Write and preview code instantly, right here.</p>
+    </div>
+    <div class="tools-grid">
+      <div class="tool-card">
+        <div class="tool-icon">🖊️</div>
+        <h3>Tryit Editor</h3>
+        <p>Write HTML, CSS, and JS in a split-pane editor with live preview.</p>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">🎨</div>
+        <h3>Color Picker</h3>
+        <p>Pick any color and get HEX, RGB, and HSL values instantly.</p>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">📐</div>
+        <h3>CSS Shadow Generator</h3>
+        <p>Visually craft box-shadow and text-shadow values, then copy the CSS.</p>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">📋</div>
+        <h3>HTML Validator</h3>
+        <p>Paste your HTML and get instant feedback on errors and warnings.</p>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">🔑</div>
+        <h3>Regex Tester</h3>
+        <p>Write and test regular expressions with live match highlighting.</p>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">📊</div>
+        <h3>JSON Formatter</h3>
+        <p>Pretty-print and validate JSON — paste messy JSON, get clean output.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section class="section section-bg">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="eyebrow">Certifications</div>
+      <h2>Prove your skills</h2>
+      <p>Earn a shareable certificate to show employers what you know.</p>
+    </div>
+    <div class="cert-grid">
+      <div class="cert-card">
+        <div class="cert-icon">📜</div>
+        <h3>HTML Certificate</h3>
+        <p>Complete all HTML modules and pass the final exam.</p>
+        <span class="cert-badge">Free exam</span>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">📜</div>
+        <h3>CSS Certificate</h3>
+        <p>Prove your styling and layout skills with a verified credential.</p>
+        <span class="cert-badge">Free exam</span>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">📜</div>
+        <h3>JavaScript Certificate</h3>
+        <p>Show that you can write clean, modern JavaScript.</p>
+        <span class="cert-badge">Free exam</span>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">📜</div>
+        <h3>Python Certificate</h3>
+        <p>Demonstrate Python proficiency — syntax, data structures, and more.</p>
+        <span class="cert-badge">Free exam</span>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">📜</div>
+        <h3>SQL Certificate</h3>
+        <p>Validate your database querying skills for analyst and dev roles.</p>
+        <span class="cert-badge">Free exam</span>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">📜</div>
+        <h3>React Certificate</h3>
+        <p>Certified React knowledge — hooks, state, and component patterns.</p>
+        <span class="cert-badge">Free exam</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="eyebrow">Community</div>
+      <h2>What learners say</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial">
+        <div class="stars">★★★★★</div>
+        <p>"I went from zero HTML knowledge to landing my first web dev job in 8 months. W3Schools was my daily resource throughout."</p>
+        <div class="testimonial-author">
+          <div class="avatar">A</div>
+          <div>
+            <div class="author-name">Ananya R.</div>
+            <div class="author-role">Front-end Developer, Bengaluru</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial">
+        <div class="stars">★★★★★</div>
+        <p>"The exercises are short and focused — exactly what I need after a full day at work. I get 20 minutes in and actually feel progress."</p>
+        <div class="testimonial-author">
+          <div class="avatar">M</div>
+          <div>
+            <div class="author-name">Marcus T.</div>
+            <div class="author-role">CS student, Nairobi</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial">
+        <div class="stars">★★★★☆</div>
+        <p>"The reference pages are the best on the internet. When I need to quickly look up a CSS property or SQL clause, I always come here first."</p>
+        <div class="testimonial-author">
+          <div class="avatar">S</div>
+          <div>
+            <div class="author-name">Sara K.</div>
+            <div class="author-role">Data Analyst, Stockholm</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- UPDATES FEED -->
+<section class="section section-bg">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="eyebrow">Updates</div>
+      <h2>What's new</h2>
+      <p>Fresh tutorials and content updates added every week.</p>
+    </div>
+    <div class="updates-list">
+      <div class="update-row">
+        <span class="update-date">Sep 2026</span>
+        <div class="update-dot"></div>
+        <div class="update-body">
+          <strong>New: CSS Grid subgrid tutorial</strong>
+          <p>Learn how to align child elements across nested grid contexts using the subgrid keyword.</p>
+        </div>
+      </div>
+      <div class="update-row">
+        <span class="update-date">Aug 2026</span>
+        <div class="update-dot"></div>
+        <div class="update-body">
+          <strong>Python 3.13 — updated reference pages</strong>
+          <p>All Python reference pages updated to include new syntax features from Python 3.13.</p>
+        </div>
+      </div>
+      <div class="update-row">
+        <span class="update-date">Aug 2026</span>
+        <div class="update-dot"></div>
+        <div class="update-body">
+          <strong>New: TypeScript generics explained</strong>
+          <p>A visual walkthrough of generic types, constraints, and mapped types in TypeScript.</p>
+        </div>
+      </div>
+      <div class="update-row">
+        <span class="update-date">Jul 2026</span>
+        <div class="update-dot"></div>
+        <div class="update-body">
+          <strong>React 19 tutorial series launched</strong>
+          <p>Six new chapters covering the server components model and the new React compiler.</p>
+        </div>
+      </div>
+      <div class="update-row">
+        <span class="update-date">Jul 2026</span>
+        <div class="update-dot"></div>
+        <div class="update-body">
+          <strong>New SQL exercises: window functions</strong>
+          <p>30 practice problems focused on ROW_NUMBER, RANK, LEAD, LAG and partitioning.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="section">
+  <div class="section-inner">
+    <div class="newsletter">
+      <div>
+        <h3>Get the weekly digest</h3>
+        <p>New tutorials, quizzes, and tips — delivered every Friday. No spam.</p>
+      </div>
+      <div class="nl-form">
+        <input class="nl-input" type="email" placeholder="your@email.com">
+        <button class="btn-green">Subscribe</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <span class="logo-badge">W3</span>
+          <span>Schools</span>
+        </div>
+        <p>The world's largest web developer site. Tutorials, references, and exercises in all major web languages since 1998.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="#">HTML Tutorial</a></li>
+          <li><a href="#">CSS Tutorial</a></li>
+          <li><a href="#">JavaScript</a></li>
+          <li><a href="#">Python</a></li>
+          <li><a href="#">SQL</a></li>
+          <li><a href="#">React</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="#">References</a></li>
+          <li><a href="#">Exercises</a></li>
+          <li><a href="#">Quizzes</a></li>
+          <li><a href="#">Certificates</a></li>
+          <li><a href="#">Tools</a></li>
+          <li><a href="#">Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Advertise</a></li>
+          <li><a href="#">Privacy policy</a></li>
+          <li><a href="#">Terms of use</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 W3Schools</span>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Cookies</a>
+        <a href="#">Sitemap</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>
