@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W3Schools // Redesign</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-[#0f1115] text-[#e2e8f0] font-sans antialiased selection:bg-emerald-500 selection:text-black min-h-screen flex flex-col justify-between">
+
+    <div>
+        <!-- Top Navigation Bar -->
+        <header class="border-b border-zinc-800 bg-[#161920] sticky top-0 z-50">
+            <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+                <div class="flex items-center space-x-6">
+                    <div class="flex items-center space-x-2">
+                        <div class="bg-emerald-500 text-black font-mono font-bold text-lg px-2.5 py-1 rounded">
+                            W3
+                        </div>
+                        <span class="font-bold tracking-tight text-white text-lg">Schools<span class="text-emerald-500">.redesign</span></span>
+                    </div>
+                    <nav class="hidden md:flex space-x-4 text-sm text-zinc-400">
+                        <a href="#" class="text-white hover:text-emerald-400 transition">Tutorials</a>
+                        <a href="#" class="hover:text-emerald-400 transition">Exercises</a>
+                        <a href="#" class="hover:text-emerald-400 transition">Certificates</a>
+                        <a href="#" class="hover:text-emerald-400 transition">Services</a>
+                    </nav>
+                </div>
+                
+                <div class="flex items-center space-x-3">
+                    <button onclick="toggleView()" id="viewToggleBtn" class="bg-zinc-800 border border-zinc-700 text-zinc-300 px-3 py-1.5 rounded text-xs font-mono font-medium hover:border-emerald-500 transition">
+                        Mode: Redesigned (Dark)
+                    </button>
+                    <a href="https://www.w3schools.com" target="_blank" class="bg-emerald-500 hover:bg-emerald-400 text-black font-semibold px-4 py-1.5 rounded text-xs transition">
+                        Original Site ↗
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="max-w-7xl mx-auto px-4 py-8">
+            
+            <!-- Hero Search Section -->
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <h1 class="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-3">
+                    Learn to Code. <span class="text-emerald-400">Smarter.</span>
+                </h1>
+                <p class="text-zinc-400 text-sm md:text-base mb-6">
+                    A clean, modern, clutter-free developer experience inspired by the web's best redesign principles.
+                </p>
+                <div class="relative">
+                    <input type="text" placeholder="Search our tutorials (e.g., HTML, CSS, JavaScript)..." class="w-full bg-[#161920] border border-zinc-800 rounded-lg px-4 py-3 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-emerald-500 transition shadow-inner">
+                    <span class="absolute right-3 top-3 bg-zinc-800 border border-zinc-700 text-zinc-400 text-xs px-2 py-1 rounded font-mono">/</span>
+                </div>
+            </div>
+
+            <!-- Quick Language Grid -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mb-12">
+                <div class="bg-[#161920] border border-zinc-800 hover:border-emerald-500/50 p-4 rounded-xl text-center transition cursor-pointer group">
+                    <div class="text-emerald-400 font-mono font-bold text-lg mb-1 group-hover:scale-105 transition">&lt;HTML&gt;</div>
+                    <div class="text-xs text-zinc-400">Markup Language</div>
+                </div>
+                <div class="bg-[#161920] border border-zinc-800 hover:border-emerald-500/50 p-4 rounded-xl text-center transition cursor-pointer group">
+                    <div class="text-emerald-400 font-mono font-bold text-lg mb-1 group-hover:scale-105 transition">CSS</div>
+                    <div class="text-xs text-zinc-400">Styling & Layout</div>
+                </div>
+                <div class="bg-[#161920] border border-zinc-800 hover:border-emerald-500/50 p-4 rounded-xl text-center transition cursor-pointer group">
+                    <div class="text-emerald-400 font-mono font-bold text-lg mb-1 group-hover:scale-105 transition">JS</div>
+                    <div class="text-xs text-zinc-400">Programming</div>
+                </div>
+                <div class="bg-[#161920] border border-zinc-800 hover:border-emerald-500/50 p-4 rounded-xl text-center transition cursor-pointer group">
+                    <div class="text-emerald-400 font-mono font-bold text-lg mb-1 group-hover:scale-105 transition">SQL</div>
+                    <div class="text-xs text-zinc-400">Databases</div>
+                </div>
+                <div class="bg-[#161920] border border-zinc-800 hover:border-emerald-500/50 p-4 rounded-xl text-center transition cursor-pointer group">
+                    <div class="text-emerald-400 font-mono font-bold text-lg mb-1 group-hover:scale-105 transition">PYTHON</div>
+                    <div class="text-xs text-zinc-400">Data & Backend</div>
+                </div>
+                <div class="bg-[#161920] border border-zinc-800 hover:border-emerald-500/50 p-4 rounded-xl text-center transition cursor-pointer group">
+                    <div class="text-emerald-400 font-mono font-bold text-lg mb-1 group-hover:scale-105 transition">REACT</div>
+                    <div class="text-xs text-zinc-400">UI Library</div>
+                </div>
+            </div>
+
+            <!-- Live Code Sandbox Preview Component -->
+            <div class="bg-[#161920] border border-zinc-800 rounded-xl overflow-hidden mb-12">
+                <div class="bg-[#1f232b] px-4 py-3 border-b border-zinc-800 flex items-center justify-between">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+                        <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                        <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+                        <span class="text-xs text-zinc-400 font-mono ml-2">interactive_compiler.html</span>
+                    </div>
+                    <button onclick="runCode()" class="bg-emerald-500 text-black font-semibold text-xs px-3 py-1 rounded hover:bg-emerald-400 transition">
+                        Run Code ▶
+                    </button>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-zinc-800">
+                    <div class="p-4 bg-[#12141a]">
+                        <pre class="text-xs font-mono text-zinc-300 overflow-x-auto leading-relaxed"><code><span class="text-pink-400">&lt;div</span> <span class="text-blue-400">class</span>=<span class="text-emerald-300">"card"</span><span class="text-pink-400">&gt;</span>
+  <span class="text-pink-400">&lt;h2&gt;</span>Hello World<span class="text-pink-400">&lt;/h2&gt;</span>
+  <span class="text-pink-400">&lt;p&gt;</span>Clean modern redesign.<span class="text-pink-400">&lt;/p&gt;</span>
+<span class="text-pink-400">&lt;/div&gt;</span></code></pre>
+                    </div>
+                    <div class="p-4 bg-[#161920] flex flex-col justify-center">
+                        <div class="text-xs text-zinc-500 uppercase font-mono mb-2">Live Output Preview:</div>
+                        <div class="p-4 bg-zinc-900 border border-zinc-800 rounded-lg">
+                            <h2 class="text-white font-bold text-base mb-1">Hello World</h2>
+                            <p class="text-zinc-400 text-sm">Clean modern redesign.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task Dropbox Submission Tool -->
+            <div class="bg-[#161920] border border-emerald-500/30 rounded-xl p-6 shadow-lg">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2 font-mono">
+                        <span>📌</span> Task Dropbox Generator (#ge-website-redesign)
+                    </h3>
+                    <span class="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">Ready to Submit</span>
+                </div>
+                <div class="bg-[#0f1115] border border-zinc-800 p-4 rounded-lg font-mono text-xs text-zinc-300 mb-4 space-y-1">
+                    <p class="text-emerald-400 font-bold">#ge-website-redesign</p>
+                    <p>• Original Website: <span class="text-zinc-400 underline">https://www.w3schools.com/</span></p>
+                    <p>• Redesigned Website: <span class="text-emerald-400 underline" id="previewUrl">(Insert your Vercel/Netlify URL)</span></p>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <input type="text" id="deployUrlInput" placeholder="Paste your deployed website URL here..." class="bg-[#0f1115] border border-zinc-800 rounded px-3 py-2 text-xs text-white font-mono flex-1 focus:outline-none focus:border-emerald-500" oninput="updateUrl(this.value)">
+                    <button onclick="copySubmission()" class="bg-emerald-500 hover:bg-emerald-400 text-black font-semibold text-xs px-5 py-2 rounded transition font-mono">
+                        Copy Submission Text
+                    </button>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="border-t border-zinc-800 bg-[#161920] py-6 mt-12 text-center text-xs text-zinc-500">
+        <p>W3Schools Redesign Challenge • Built for clean aesthetics, high performance, and simplicity.</p>
+    </footer>
+
+    <!-- Script Logic -->
+    <script>
+        let isLightMode = false;
+
+        function toggleView() {
+            isLightMode = !isLightMode;
+            const btn = document.getElementById('viewToggleBtn');
+            
+            if (isLightMode) {
+                document.body.className = "bg-[#f4f4f5] text-[#18181b] font-sans antialiased selection:bg-emerald-500 selection:text-white min-h-screen flex flex-col justify-between";
+                btn.innerText = "Mode: Classic Light (W3 Style)";
+                btn.className = "bg-white border border-zinc-300 text-zinc-700 px-3 py-1.5 rounded text-xs font-mono font-medium hover:border-emerald-500 transition shadow-sm";
+            } else {
+                document.body.className = "bg-[#0f1115] text-[#e2e8f0] font-sans antialiased selection:bg-emerald-500 selection:text-black min-h-screen flex flex-col justify-between";
+                btn.innerText = "Mode: Redesigned (Dark)";
+                btn.className = "bg-zinc-800 border border-zinc-700 text-zinc-300 px-3 py-1.5 rounded text-xs font-mono font-medium hover:border-emerald-500 transition";
+            }
+        }
+
+        function updateUrl(val) {
+            const preview = document.getElementById('previewUrl');
+            preview.innerText = val.trim() ? val : '(Insert your Vercel/Netlify URL)';
+        }
+
+        function runCode() {
+            alert("✨ Sandbox executed successfully! The layout layout reacts instantly.");
+        }
+
+        function copySubmission() {
+            const urlInput = document.getElementById('deployUrlInput').value.trim();
+            const targetUrl = urlInput ? urlInput : '(Insert your Vercel/Netlify URL)';
+            const text = `#ge-website-redesign\n• Original Website: https://www.w3schools.com/\n• Redesigned Website: ${targetUrl}`;
+            
+            navigator.clipboard.writeText(text);
+            alert("✅ Successfully copied to clipboard! Paste it into the #ge-website-redesign channel.");
+        }
+    </script>
+</body>
+</html>
